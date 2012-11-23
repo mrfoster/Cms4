@@ -1,0 +1,14 @@
+﻿@model Cms4.TestResources.Models.SignInViewModel
+
+@using (Html.BeginForm())
+{
+    <div class="form-field">
+        @Html.LabelFor(x=>x.Username)
+        @Html.EditorFor(x=>x.Username)
+    </div>
+    <div class="form-field">
+        @Html.LabelFor(x=>x.Password)
+        @Html.EditorFor(x=>x.Password)
+    </div>
+    <button type="submit">Sign In</button>
+}
