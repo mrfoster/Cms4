@@ -49,7 +49,7 @@ namespace Cms4.EmbeddedResources
 
         private static string GetKey(string virtualPath)
         {
-            return virtualPath.ToLower().TrimStart('~', '/').Replace('/', '.');
+            return virtualPath.ToLower().Replace("~", "").Replace('/', '.');
         }
     }
 

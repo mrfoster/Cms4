@@ -12,6 +12,8 @@ namespace Cms4.TestProject
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("Content/{*content}");
+            routes.IgnoreRoute("Scripts/{*content}");
 
             routes.MapRoute(
                 name: "Default",

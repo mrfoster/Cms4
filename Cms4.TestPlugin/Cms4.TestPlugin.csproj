@@ -122,6 +122,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\login.css">
+      <DependentUpon>login.less</DependentUpon>
+    </Content>
     <Content Include="Content\login.min.css">
       <DependentUpon>login.less</DependentUpon>
     </Content>

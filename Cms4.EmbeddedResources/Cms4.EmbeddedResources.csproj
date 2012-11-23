@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ResourcePathProvider.cs" />
-    <Compile Include="ResourceService.cs" />
+    <Compile Include="Cmdlets\ResourceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +49,7 @@
     <None Include="init.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Cmdlets\" />
+    <Content Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
