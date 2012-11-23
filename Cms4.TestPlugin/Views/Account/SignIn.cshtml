@@ -1,14 +1,10 @@
-﻿@model Cms4.TestResources.Models.SignInViewModel
+﻿@model Cms4.TestPlugin.Models.SignInModel
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SignIn", "Account", FormMethod.Post, new {@class = "cms-sign-in-form"}))
 {
-    <div class="form-field">
-        @Html.LabelFor(x=>x.Username)
-        @Html.EditorFor(x=>x.Username)
-    </div>
-    <div class="form-field">
-        @Html.LabelFor(x=>x.Password)
-        @Html.EditorFor(x=>x.Password)
-    </div>
+    @Html.AntiForgeryToken()
+
+    @Html.EditorForModel()
+
     <button type="submit">Sign In</button>
 }
