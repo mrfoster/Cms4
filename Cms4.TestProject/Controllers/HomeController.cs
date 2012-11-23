@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Cms4.TestPlugin.Controllers
+namespace Cms4.TestProject.Controllers
 {
     public class HomeController : Controller
     {
