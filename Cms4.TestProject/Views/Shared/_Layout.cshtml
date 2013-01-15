@@ -5,9 +5,10 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/SiteStyles")*@
-    <link href="~/Content/site.min.css" rel="stylesheet" />
-    <link href="~/Content/login.min.css" rel="stylesheet" />
+    @Styles.Render("~/SiteStyles")
+    @Styles.Render("~/EmbeddedStyles")
+@*    <link href="~/Content/site.min.css" rel="stylesheet" />
+    <link href="~/Content/login.min.css" rel="stylesheet" />*@
 </head>
 <body>
     <div>

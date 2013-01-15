@@ -1,0 +1,13 @@
+﻿.cms-sign-in-form {
+  border: 1px solid #000;
+  background-color: #f08080;
+  padding: 10px;
+  width: 200px;
+}
+.cms-sign-in-form .input-validation-error {
+  outline: solid 1px #830000;
+}
+.cms-sign-in-form .field-validation-error {
+  display: block;
+  color: #830000;
+}

@@ -12,9 +12,11 @@ namespace Cms4.EmbeddedResources
     public class ResourcePathProvider : VirtualPathProvider
     {
         private readonly Dictionary<string, EmbeddedFile> resources;
+        private readonly VirtualPathProvider previous;
 
-        public ResourcePathProvider(IEnumerable<Assembly> assemblies)
+        public ResourcePathProvider(IEnumerable<Assembly> assemblies, VirtualPathProvider previous)
         {
+            this.previous = previous;
             resources = new Dictionary<string, EmbeddedFile>();
             foreach (var embeddedFile in assemblies.SelectMany(a => a.GetManifestResourceNames().Select(n => new EmbeddedFile(a, n))))
             {
@@ -27,24 +29,38 @@ namespace Cms4.EmbeddedResources
 
         public override bool FileExists(string virtualPath)
         {
-            return resources.ContainsKey(GetKey(virtualPath)) || base.FileExists(virtualPath);
-        }
-
-        public override VirtualFile GetFile(string virtualPath)
-        {
-            return base.FileExists(virtualPath) ? base.GetFile(virtualPath) : GetVirtualFile(virtualPath);
+            return PathExists(virtualPath) || previous.FileExists(virtualPath);
         }
 
         public override CacheDependency GetCacheDependency(string virtualPath, IEnumerable virtualPathDependencies, DateTime utcStart)
         {
-            return resources.ContainsKey(GetKey(virtualPath)) ? null :
-                base.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
+            return PathExists(virtualPath) ? null : previous.GetCacheDependency(virtualPath, virtualPathDependencies, utcStart);
+        }
+
+        public override VirtualDirectory GetDirectory(string virtualDir)
+        {
+            return previous.GetDirectory(virtualDir);
+        }
+
+        public override bool DirectoryExists(string virtualDir)
+        {
+            return previous.DirectoryExists(virtualDir);
+        }
+
+        public override VirtualFile GetFile(string virtualPath)
+        {
+            return previous.FileExists(virtualPath) ? previous.GetFile(virtualPath) : GetVirtualFile(virtualPath);
         }
 
         private VirtualFile GetVirtualFile(string virtualPath)
         {
             var key = GetKey(virtualPath);
             return resources.ContainsKey(key) ? new ResourceVirtualFile(virtualPath, resources[key]) : null;
+        }
+
+        private bool PathExists(string path)
+        {
+            return resources.ContainsKey(GetKey(path));
         }
 
         private static string GetKey(string virtualPath)
@@ -64,8 +80,14 @@ namespace Cms4.EmbeddedResources
             Assembly = assembly;
             Resource = resource;
 
-            var startIndex = assembly.GetName().Name.Length;
-            Key = resource.ToLower().Substring(startIndex, resource.Length - startIndex);
+            Key = resource.ToLower();
+
+            var prefix = assembly.GetName().Name;
+            if (resource.StartsWith(prefix))
+            {
+                var startIndex = prefix.Length;
+                Key = Key.Substring(startIndex, resource.Length - startIndex);
+            }
         }
 
         public Stream Open()

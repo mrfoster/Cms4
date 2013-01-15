@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 
-namespace Cms4.EmbeddedResources
+namespace Cms4.EmbeddedResources.Cmdlets
 {
     public class ResourceService
     {
@@ -19,6 +17,11 @@ namespace Cms4.EmbeddedResources
         }
 
         public void OverrideResource(string virtualPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ShowResource(string virtualPath)
         {
             throw new NotImplementedException();
         }

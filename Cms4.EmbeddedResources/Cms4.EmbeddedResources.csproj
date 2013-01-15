@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="ResourcePathProvider.cs" />
     <Compile Include="Cmdlets\ResourceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

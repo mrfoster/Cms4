@@ -1,21 +1,20 @@
 ﻿using System.Reflection;
-using System.Web.Hosting;
 using Cms4.EmbeddedResources;
 using Cms4.TestProject.App_Start;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof(EmbeddedResources), "PostStart")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(EmbeddedResources), "PreStart")]
 
 namespace Cms4.TestProject.App_Start
 {
     public static class EmbeddedResources
     {
-        public static void PostStart()
+        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+
+        public static void PreStart()
         {
-            HostingEnvironment.RegisterVirtualPathProvider(
-                new ResourcePathProvider(new[]
-                    {
-                        Assembly.GetAssembly(typeof (TestPlugin.Models.SignInModel))
-                    }));
+            //TODO: set assemblies for embedded resources
+            bootstrapper.Assemblies = new[] { Assembly.GetAssembly(typeof (TestPlugin.Models.SignInModel))};
+            bootstrapper.Start();
         }
     }
 }
