@@ -9,11 +9,9 @@ namespace Cms4.TestProject.App_Start
         {
             bundles.DirectoryFilter.Clear();
             
-            bundles.Add(new StyleBundle("~/EmbeddedStyles")
-                .Include("~/Content/login.css"));
-
             bundles.Add(new StyleBundle("~/SiteStyles")
-                .Include("~/Content/site.css"));
+                .Include("~/Content/site.css")
+                .Include("~/Content/login.css"));
         }
     }
 }

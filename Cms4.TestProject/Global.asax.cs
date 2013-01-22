@@ -8,7 +8,6 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Cms4.EmbeddedResources;
 using Cms4.TestProject.App_Start;
 
 namespace Cms4.TestProject
